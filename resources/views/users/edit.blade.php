@@ -1,37 +1,14 @@
-@extends('layouts.form')
+<form method="post" action="{{route('users.edit', $user)}}">
+    {{ csrf_field() }}
+    {{ method_field('patch') }}
 
-@section('css')
+    <input type="text" name="name"  value="{{ $user->name }}" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+    <input type="email" name="email"  value="{{ $user->email }}" />
 
-@endsection
+    <input type="password" name="password" />
 
-@section('card')
+    <input type="password" name="password_confirmation" />
 
-    @component('components.card')
-
-        @slot('title')
-            @lang('Modifer le profil')
-        @endslot
-
-        <form method="POST" action="{{ route('profile.update', $user->id) }}">
-            {{ csrf_field() }}
-            {{ method_field('PUT') }}
-
-            @include('partials.form-group', [
-                'title' => __('Adresse email'),
-                'type' => 'email',
-                'name' => 'email',
-                'required' => true,
-                'value' => $user->email,
-                ])
-
-            @component('components.button')
-                @lang('Envoyer')
-            @endcomponent
-
-        </form>
-
-    @endcomponent
-
-@endsection
+    <button type="submit">Send</button>
+</form>

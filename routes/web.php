@@ -24,12 +24,8 @@ Route::get('/users', function (){
         ]
     ];
 });
-Route::middleware ('auth', 'verified')->group (function () {
-    Route::resource ('profile', 'ProfileController', [
-        'only' => ['edit', 'update', 'destroy', 'show'],
-        'parameters' => ['profile' => 'user']
-    ]);
-});
+Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+Route::patch('users/{user}/update',  ['as' => 'users.update', 'uses' => 'UserController@update']);
 
 Auth::routes();
 
